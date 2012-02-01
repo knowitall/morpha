@@ -1,0 +1,199 @@
+MORPHA STEMMER
+
+http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html
+
+A fast and robust morphological analyser for English based on finite-state
+techniques that returns the lemma and inflection type of a word, given the word
+form and its part of speech. (The latter is optional but accuracy is degraded
+if it is not present).
+
+Converted to Java using JFlex.  The class is not threadsafe.
+
+
+README FROM ORIGINAL MORPHA DISTRIBUTION
+
+                                         University of Sussex  8 Sep 2003
+
+This directory contains software for morphological processing of English
+as developed by Kevin Humphreys <kwh@dcs.shef.ac.uk>, John Carroll
+<john.carroll@cogs.susx.ac.uk> and Guido Minnen.
+
+To be used for research purposes only (see section 4 below). If you make
+any changes, the authors would appreciate it if you sent them details of
+what you have done.
+
+Covers the English inflectional suffixes:
+
+  -s     plural of nouns, 3rd person singular present of verbs
+  -ed    past tense
+  -en    past participle
+  -ing   progressive of verbs
+
+1. Usage
+--------
+
+  morpha [-a] [-c] [-t] [-u] [-f verbstem-file]
+  morphg [-c] [-t] [-u] [-f verbstem-file]
+
+The commands operate as filters, reading from the standard input and
+writing to the standard output.
+
+They may be invoked with the following command-line options:
+
+  -a Output affixes (morpha only).
+
+  -c Preserve case distinctions wherever possible.
+
+  -t Output part-of-speech tags if they are in the input.
+
+  -u Indicate that the words in the input are not tagged with
+     part-of-speech labels. N.B. This mode of use is not recommended
+     since the resulting ambiguity in the input is likely to lead to
+     incorrect output.
+
+  -f By default, the commands attempt to read a file called
+     'verbstem.list' in the user's current directory which is expected
+     to contain a list of stems of verbs that undergo doubling of
+     their final consonant, as occurs in British English spelling.
+     This option allows the user to specify a different file of verb
+     stems (for example if American English behaviour is required).
+     If this option is specified then it must be the last one on
+     the command-line.
+
+See the file doc.txt for specifications of input and output formats,
+and examples of usage.
+
+2. Files
+--------
+
+  Makefile       makefile for compiling the flex sources; can be
+                 used for compiling both flex descriptions by 
+                 the command `make flex-description-file'
+  README         this file
+  doc.txt        specifications of input/output formats, and usage
+                 examples
+  gpost          postamble file used in deriving morphg.lex
+  gpre           preamble file used in deriving morphg.lex
+  invert.sh      unix shell program that derives morphg.lex from
+                 morpha.lex
+  minnen.pdf     pre-final PDF version of the NLE article by Minnen, 
+                 Carroll and Pearce (2001)
+  morpha.{ix86_linux|ppc_darwin|sun4_sunos}
+                 executables for the morphological analyser; for
+                 details of usage see above 
+  morpha.lex     flex description constituting the source of the 
+                 morphological analyser 
+  morphg.{ix86_linux|ppc_darwin|sun4_sunos}
+                 executables for the morphological generator; for
+                 details of usage see above
+  morphg.lex     flex description constituting the source of the 
+                 morphological generator
+  verbstem.list  list of verb stems that allow for consonant doubling
+                 in British English 
+
+The file morphg.lex is derived automatically from the file morpha.lex
+using invert.sh, as described in the paper by Minnen, Carroll and
+Pearce (2001) -- full reference below.
+
+3. Compilation
+--------------
+
+To recompile the morph tools, either type the following commands
+(making sure that you use the 2.5.4a version of flex recompiled with
+larger internal limits -- see below), or (more conveniently) use the
+Makefile in this directory by typing `make morpha' or `make morphg'.
+
+  flex -i -Cfe -8 -omorpha.yy.c morpha.lex
+  gcc -o morpha morpha.yy.c
+
+or 
+
+  flex -i -Cfe -8 -omorphg.yy.c morphg.lex
+  gcc -o morphg morphg.yy.c
+
+The executables included in this release were built omitting the
+Flex options -Cfe -8, resulting in a reduction in binary file size
+of two thirds (and a reduction in processing speed of around 20%).
+These options also have to be left out and the option -Dinteractive
+added to gcc (resulting in a further decrease in throughput) in order
+to get the morph tools to return results immediately when used via
+unix pipes inside other programs.
+
+N.B. Recompiling the morph tools requires an adapted version of Flex.
+The Flex source code is freely available from:
+
+  http://www.go.dlr.de/fresh/unix/src/misc/.warix/flex-2.5.4a.tar.gz.html
+
+The Flex source should be changed to allow for more internal states by
+increasing the definitions in flexdef.h of:
+
+  #define JAMSTATE -32766 
+  ... 
+  #define MAXIMUM_MNS 31999
+  ...
+  #define BAD_SUBSCRIPT -32767
+
+to:
+
+  #define JAMSTATE -800000 
+  ... 
+  #define MAXIMUM_MNS 800000
+  ...
+  #define BAD_SUBSCRIPT -800000
+
+and recompiling Flex. When recompiling the morph tools ensure that the
+Makefile points to the new version of Flex.
+
+4. Acknowledgements, copyrights etc.
+------------------------------------
+
+Copyright (c) 1995-2000 University of Sheffield, University of Sussex
+All rights reserved.
+
+Redistribution and use of source and derived binary forms are
+permitted without fee provided that:
+
+  - they are not used in commercial products
+  - the above copyright notice and this paragraph are duplicated in
+    all such forms
+  - any documentation, advertising materials, and other materials
+    related to such distribution and use acknowledge that the software
+    was developed by Kevin Humphreys <kwh@dcs.shef.ac.uk>, John
+    Carroll <john.carroll@cogs.susx.ac.uk> and Guido Minnen
+    and refer to the following related publication:
+
+  Guido Minnen, John Carroll and Darren Pearce. 2001. `Applied
+  morphological processing of English'. Natural Language Engineering,
+  7(3). 207-223.
+
+The name of University of Sheffield may not be used to endorse or
+promote products derived from this software without specific prior
+written permission.
+  
+This software is provided "as is" and without any express or implied
+warranties, including, without limitation, the implied warranties of
+merchantibility and fitness for a particular purpose.
+
+The exception lists were derived semi-automatically from WordNet 1.5,
+and various other corpora and MRDs.
+
+Many thanks to Tim Baldwin, Chris Brew, Bill Fisher, Gerald Gazdar,
+Dale Gerdemann, Adam Kilgarriff and Ehud Reiter for suggested
+improvements.
+
+WordNet 1.5 Copyright 1995 by Princeton University.
+All rights reseved.
+
+THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND PRINCETON
+UNIVERSITY MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED.
+BY WAY OF EXAMPLE, BUT NOT LIMITATION, PRINCETON UNIVERSITY MAKES NO
+REPRESENTATIONS OR WARRANTIES OF MERCHANT- ABILITY OR FITNESS FOR ANY
+PARTICULAR PURPOSE OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE
+OR DOCUMENTATION WILL NOT INFRINGE ANY THIRD PARTY PATENTS,
+COPYRIGHTS, TRADEMARKS OR OTHER RIGHTS.
+
+The name of Princeton University or Princeton may not be used in
+advertising or publicity pertaining to distribution of the software
+and/or database.  Title to copyright in this software, database and
+any associated documentation shall at all times remain with Princeton
+University and LICENSEE agrees to preserve same.
