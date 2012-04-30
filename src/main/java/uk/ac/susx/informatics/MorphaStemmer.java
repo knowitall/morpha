@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import uk.ac.susx.informatics.Morpha;
 
-class MorphaStemmer {
+public class MorphaStemmer {
     public String stem(String text) {
         return this.morpha(text);
     }
