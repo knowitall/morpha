@@ -12,4 +12,19 @@
     <connection>scm:git://github.com/knowitall/morpha.git</connection>
     <developerConnection>scm:git://git@github.com:knowitall/morpha.git</developerConnection>
   </scm>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <goals>deploy</goals>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <scmCommentPrefix>(release) </scmCommentPrefix>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
