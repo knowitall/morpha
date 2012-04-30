@@ -9,6 +9,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <scm>
-    <connection>scm:git://</connection>
+    <connection>scm:git://github.com/knowitall/morpha.git</connection>
+    <developerConnection>scm:git://git@github.com:knowitall/morpha.git</developerConnection>
   </scm>
 </project>
