@@ -6,7 +6,7 @@
     <artifactId>oss-parent</artifactId>
     <version>7</version>
   </parent>
-  <groupId>uk.ac.susx.informatics</groupId>
+  <groupId>edu.washington.cs.knowitall</groupId>
   <artifactId>morpha-stemmer</artifactId>
   <version>1.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>

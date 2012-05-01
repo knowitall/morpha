@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.ac.susx.informatics;
+package edu.washington.cs.knowitall.morpha;
 
 /* author: Michael Schmitz <schmmd@cs.washington.edu>
  *
