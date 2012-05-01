@@ -1,26 +1,54 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
   <groupId>uk.ac.susx.informatics</groupId>
   <artifactId>morpha-stemmer</artifactId>
-  <name>morpha-stemmer</name>
   <version>1.0.3-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>morpha-stemmer</name>
+  <description>A utility for lemmatizing word tokens.</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <distributionManagement>
-    <repository>
-      <id>knowitall</id>
-      <url>file:///cse/www2/knowitall/maven2</url>
-      <layout>default</layout>
-    </repository>
-    <snapshotRepository>
-      <id>knowitall</id>
-      <url>file:///cse/www2/knowitall/maven2-snapshot</url>
-      <layout>default</layout>
-    </snapshotRepository>
-  </distributionManagement>
+  <url>http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html</url>
+  <licenses>
+    <license>
+      <name>Academic License</name>
+      <url>http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.tar.gz</url>
+      <distribution>repo</distribution>
+      <comments>A research-restricted license.  This license accompanied the original lex files.</comments>
+    </license>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>This license applies to the wrapper code, which eases the use of the JFLEX-generated code.</comments>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Michael Schmitz</name>
+      <email>schmmd@cs.washington.edu</email>
+      <organization>Univerisity of Washington</organization>
+    </developer>
+    <developer>
+      <name>John Carroll</name>
+      <email>kwh@dcs.shef.ac.uk</email>
+      <organization>University of Sheffield</organization>
+    </developer>
+    <developer>
+      <name>Guido Minnen</name>
+      <organization>University of Sussex</organization>
+      <email>john.carroll@cogs.susx.ac.uk</email>
+    </developer>
+  </developers>
   <scm>
+    <url>https://github.com/knowitall/morpha</url>
     <connection>scm:git://github.com/knowitall/morpha.git</connection>
     <developerConnection>scm:git://git@github.com:knowitall/morpha.git</developerConnection>
   </scm>
