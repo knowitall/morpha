@@ -8,7 +8,7 @@
   </parent>
   <groupId>edu.washington.cs.knowitall</groupId>
   <artifactId>morpha-stemmer</artifactId>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
   <packaging>jar</packaging>
   <name>morpha-stemmer</name>
   <description>A utility for lemmatizing word tokens.</description>
