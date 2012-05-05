@@ -40,11 +40,17 @@
       <name>John Carroll</name>
       <email>kwh@dcs.shef.ac.uk</email>
       <organization>University of Sheffield</organization>
+      <roles>
+        <role>Developer of original lex files (not included)</role>
+      </roles>
     </developer>
     <developer>
       <name>Guido Minnen</name>
       <organization>University of Sussex</organization>
       <email>john.carroll@cogs.susx.ac.uk</email>
+      <roles>
+        <role>Developer of original lex files (not included)</role>
+      </roles>
     </developer>
   </developers>
   <scm>
