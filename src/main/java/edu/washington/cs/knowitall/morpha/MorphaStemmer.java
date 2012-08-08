@@ -24,21 +24,59 @@ package edu.washington.cs.knowitall.morpha;
 
 import java.io.StringReader;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import uk.ac.susx.informatics.Morpha;
 
 public class MorphaStemmer {
+    private static final Pattern whitespace = Pattern.compile("\\s+");
+
+    /***
+     * Stem the supplied text, splitting on whitespace to break it into words. 
+     **/
     public String stem(String text) {
-        return this.morpha(text);
+        return this.morpha(cleanText(text), false);
     }
 
-    public String morpha(String text) {
-        String[] textParts = text.split(" ");
+    /***
+     * Stem the supplied token.
+     *
+     * @throws  IllegalArgumentException  token contains whitespace
+     **/
+    public String stemToken(String token) {
+        if (whitespace.matcher(token).find()) {
+            throw new IllegalArgumentException("Token may not contain a space: " + token);
+        }
+        return this.morpha(cleanText(token), false);
+    }
+
+    /***
+     * Stem the supplied token using supplemental postag information.
+     *
+     * @throws  IllegalArgumentException  token contains whitespace
+     **/
+    public String stemToken(String token, String postag) {
+        if (whitespace.matcher(token).find()) {
+            throw new IllegalArgumentException("Token may not contain a space: " + token);
+        }
+        return this.morpha(cleanText(token) + "_" + postag, true);
+    }
+
+    private String cleanText(String text) {
+        return text.replaceAll("_", "-");
+    }
+
+    /***
+     * Run the morpha algorithm on the specified string.
+     **/
+    public String morpha(String text, boolean tags) {
+        String[] textParts = whitespace.split(text);
 
         StringBuilder result = new StringBuilder();
         try {
             for (int i = 0; i < textParts.length; i++) {
-                Morpha morpha = new Morpha(new StringReader(textParts[i]), false);
+                Morpha morpha = new Morpha(new StringReader(textParts[i]), tags);
+
                 if (result.length() != 0) {
                     result.append(" ");
                 }
