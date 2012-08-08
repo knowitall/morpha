@@ -70,6 +70,10 @@ public class MorphaStemmer {
      * Run the morpha algorithm on the specified string.
      **/
     public String morpha(String text, boolean tags) {
+        if (text.isEmpty()) {
+            return "";
+        }
+
         String[] textParts = whitespace.split(text);
 
         StringBuilder result = new StringBuilder();
