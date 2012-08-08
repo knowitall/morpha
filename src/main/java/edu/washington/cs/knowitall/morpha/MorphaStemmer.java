@@ -34,8 +34,8 @@ public class MorphaStemmer {
     /***
      * Stem the supplied text, splitting on whitespace to break it into words. 
      **/
-    public String stem(String text) {
-        return this.morpha(cleanText(text), false);
+    public static String stem(String text) {
+        return morpha(cleanText(text), false);
     }
 
     /***
@@ -43,11 +43,11 @@ public class MorphaStemmer {
      *
      * @throws  IllegalArgumentException  token contains whitespace
      **/
-    public String stemToken(String token) {
+    public static String stemToken(String token) {
         if (whitespace.matcher(token).find()) {
             throw new IllegalArgumentException("Token may not contain a space: " + token);
         }
-        return this.morpha(cleanText(token), false);
+        return morpha(cleanText(token), false);
     }
 
     /***
@@ -55,21 +55,21 @@ public class MorphaStemmer {
      *
      * @throws  IllegalArgumentException  token contains whitespace
      **/
-    public String stemToken(String token, String postag) {
+    public static String stemToken(String token, String postag) {
         if (whitespace.matcher(token).find()) {
             throw new IllegalArgumentException("Token may not contain a space: " + token);
         }
-        return this.morpha(cleanText(token) + "_" + postag, true);
+        return morpha(cleanText(token) + "_" + postag, true);
     }
 
-    private String cleanText(String text) {
+    private static String cleanText(String text) {
         return text.replaceAll("_", "-");
     }
 
     /***
      * Run the morpha algorithm on the specified string.
      **/
-    public String morpha(String text, boolean tags) {
+    public static String morpha(String text, boolean tags) {
         if (text.isEmpty()) {
             return "";
         }
@@ -107,12 +107,11 @@ public class MorphaStemmer {
     }
 
     public static void main(String[] args) {
-        MorphaStemmer stemmer = new MorphaStemmer();
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
-            System.out.println(stemmer.stem(line));
+            System.out.println(MorphaStemmer.stem(line));
         }
     }
 }
