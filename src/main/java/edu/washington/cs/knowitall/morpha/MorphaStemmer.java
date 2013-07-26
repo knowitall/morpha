@@ -97,13 +97,7 @@ public class MorphaStemmer {
             return text;
         }
 
-        String string = result.toString();
-        if (string.equals("null")) {
-            return "";
-        }
-        else {
-            return string;
-        }
+		return result.toString();
     }
 
     public static void main(String[] args) {
