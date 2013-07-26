@@ -97,7 +97,7 @@ public class MorphaStemmer {
             return text;
         }
 
-		return result.toString();
+        return result.toString();
     }
 
     public static void main(String[] args) {
